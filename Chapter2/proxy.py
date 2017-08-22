@@ -1,12 +1,14 @@
+#!/usr/bin/python2.7
+
 import sys
 import socket
 import threading
 
 
-
 # this is a pretty hex dumping function directly taken from
 # http://code.activestate.com/recipes/142812-hex-dumper/
 def hexdump(src, length=16):
+
     result = []
     digits = 4 if isinstance(src, unicode) else 2
 
@@ -20,7 +22,7 @@ def hexdump(src, length=16):
 
 
 def receive_from(connection):
-        
+
         buffer = ""
 
 	# We set a 2 second time out depending on your 
@@ -29,7 +31,7 @@ def receive_from(connection):
 	
         try:
                 # keep reading into the buffer until there's no more data
-		# or we time out
+		# or we time out http://code.activestate.com/recipes/142812-hex-dumper/
                 while True:
                         data = connection.recv(4096)
                         
@@ -56,7 +58,7 @@ def response_handler(buffer):
 
 
 def proxy_handler(client_socket, remote_host, remote_port, receive_first):
-        
+
         # connect to the remote host
         remote_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         remote_socket.connect((remote_host,remote_port))
@@ -121,7 +123,7 @@ def proxy_handler(client_socket, remote_host, remote_port, receive_first):
 			break
 		
 def server_loop(local_host,local_port,remote_host,remote_port,receive_first):
-                
+    
         server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
         try:

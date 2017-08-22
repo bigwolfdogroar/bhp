@@ -52,7 +52,8 @@ def client_handler(client_socket):
                                 break
                         else:
                                 file_buffer += data
-                                
+                        print 'recv data:'
+                        print file_buffer        
                 # now we take these bytes and try to write them out
                 try:
                         file_descriptor = open(upload_destination,"wb")
@@ -129,7 +130,7 @@ def client_sender(buffer):
                 # if not we are going to wait for the user to punch some in
                 
                 if len(buffer):
-                        
+
                         client.send(buffer)
                 
                 while True:
